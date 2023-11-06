@@ -10,22 +10,29 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookingService {
     private final String filePath = "booking/dataBookings/data.json";
-    private final List<Booking> flightsDatabase = new ArrayList<>();
+    private final List<Booking> bookingsData = new ArrayList<>();
     private BookingDAO bookingDAO;
-    public BookingService() {
-//        this.bookingDAO = bookingDAO;
-//        this.bookingDAO =
+    public BookingService(BookingDAO bookingDAO) {
+        this.bookingDAO = bookingDAO;
     }
     public List<Booking> getAllBookings() {
-
-        return;
+        return JsonWorker.getDataFromFile(Booking.class, filePath);
     }
     public List<Booking> getAllUserBookings(String name, String surname) {
-
-        return;
+        if(name.isEmpty() || surname.isEmpty()){
+            System.out.println("Exeption name or surname");
+            return null;
+        } else {
+            return getAllBookings().stream().filter(booking
+                    -> booking.getHumans().stream().anyMatch(human
+                    -> human.getName().equals(name)
+                    && human.getSurname().equals(surname)))
+                    .collect(Collectors.toList());
+        }
     }
     public int findByIdBooking(int bookingId) {
         return bookingDAO.findByIdBooking(bookingId);
@@ -41,7 +48,7 @@ public class BookingService {
     public void loadDataBooking() {
         File file = new File(filePath);
         if (!file.exists()) {
-            JsonWorker.loadDataToFile(flightsDatabase, filePath);
+            JsonWorker.loadDataToFile(bookingsData, filePath);
         }
     }
 }
