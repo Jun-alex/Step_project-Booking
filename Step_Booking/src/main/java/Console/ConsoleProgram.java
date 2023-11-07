@@ -45,7 +45,7 @@ public class ConsoleProgram {
                         int flightId;
                         try {
                             flightId = scanner.nextInt();
-                            flightController.displayFlightInfo(flightId);
+                            flightController.getFlightById(flightId);
                         } catch (InputMismatchException e) {
                             System.out.println("Помилка введення айді рейсу. Будь ласка, введіть число.");
                             scanner.next();
@@ -68,7 +68,7 @@ public class ConsoleProgram {
                         }
 
                         List<Flight> foundFlights = flightController.
-                                searchFlights(destination, date, passengerCount);
+                                getFlightByUserInfo(destination, date, passengerCount);
 
                         if (foundFlights.isEmpty()) {
                             System.out.println("Рейси не знайдені.");
