@@ -8,6 +8,7 @@
     <artifactId>Step_Booking</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!--Додаємо в залежності бібліотеку Jackson-->
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
