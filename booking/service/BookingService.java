@@ -38,11 +38,15 @@ public class BookingService {
     public int findByIdBooking(int bookingId) {
         return bookingDAO.findByIdBooking(bookingId);
     }
-    public void saveBooking( List<Human> humans, String destination, int idFlight) {
-        int id = bookingDAO.getAllBookings().size();
-        Booking newBooking = new Booking(humans, id, destination, idFlight);
-        // Логіка для створення бронювання
-        bookingDAO.saveBooking(newBooking);
+    public int saveBooking( List<Human> humans, String destination, int idFlight) {
+        if (humans.size() > 0 && idFlight != 0) {
+            int id = bookingDAO.getAllBookings().size();
+            Booking newBooking = new Booking(humans, id, destination, idFlight);
+            // Логіка для створення бронювання
+            bookingDAO.saveBooking(newBooking);
+            return id;
+        }
+        return -1; // Повернення значення за умови, що умова не виконана
     }
     public void cancelBooking(int bookingId) {
         // Логіка для скасування бронювання
