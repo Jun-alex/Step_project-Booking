@@ -10,12 +10,14 @@ public class Booking {
     private LocalDate dateCreate;
     private LocalDate dateUpdate;
     private int id;
-    public Booking(List<Human> humans, int id, String destination ) {
+    private int idFlight;
+    public Booking(List<Human> humans, int id, String destination, int idFlight ) {
         this.humans = humans;
         this.destination = destination;
         this.dateCreate = LocalDate.now();
         this.dateUpdate = LocalDate.now();
         this.id = id;
+        this.idFlight = idFlight;
     }
     public List<Human> getHumans() {return humans;}
     public void setHumans(List<Human> humans) {this.humans = humans;}
@@ -25,6 +27,7 @@ public class Booking {
     public int getId() {return id;}
     public String getDestination() {return destination;}
     public void setDestination(String destination) {this.destination = destination;}
+    public  int getIdFlight(){ return idFlight; }
     @Override
     public String toString() {
         StringBuilder humansList = new StringBuilder();
@@ -39,6 +42,7 @@ public class Booking {
                 .append(", dateCreate='").append(dateCreate).append('\'')
                 .append(", dateUpdate='").append(dateUpdate).append('\'')
                 .append(", id='").append(id).append('\'')
+                .append(", idFlight='").append(idFlight).append('\'')
                 .append('}');
         return sb.toString();
     }

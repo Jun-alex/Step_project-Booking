@@ -3,6 +3,7 @@ package service;
 import DAO.BookingDAO;
 import jsonWorker.JsonWorker;
 import models.Booking;
+import models.Human;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,13 +38,18 @@ public class BookingService {
     public int findByIdBooking(int bookingId) {
         return bookingDAO.findByIdBooking(bookingId);
     }
-    public void saveBooking(Booking newBooking) {
+    public void saveBooking( List<Human> humans, String destination, int idFlight) {
+        int id = bookingDAO.getAllBookings().size();
+        Booking newBooking = new Booking(humans, id, destination, idFlight);
         // Логіка для створення бронювання
         bookingDAO.saveBooking(newBooking);
     }
     public void cancelBooking(int bookingId) {
         // Логіка для скасування бронювання
-        bookingDAO.cancelBooking(bookingId);
+        List<Booking> bookings = bookingDAO.getAllBookings();
+        bookings.stream().filter(booking -> booking.getId() == bookingId)
+                .findFirst()
+                .ifPresent(booking -> bookingDAO.cancelBooking(bookingId));
     }
     public void loadDataBooking() {
         File file = new File(filePath);
