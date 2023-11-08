@@ -1,4 +1,4 @@
-package models;
+package booking.models;
 
 import java.util.Objects;
 

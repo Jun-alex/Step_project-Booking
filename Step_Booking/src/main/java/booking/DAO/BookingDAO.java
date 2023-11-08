@@ -1,4 +1,4 @@
-package DAO;
+package booking.DAO;
 
 import models.Booking;
 

@@ -1,4 +1,4 @@
-package service;
+package booking.service;
 
 import DAO.BookingDAO;
 import jsonWorker.JsonWorker;

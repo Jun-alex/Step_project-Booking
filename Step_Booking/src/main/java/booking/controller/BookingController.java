@@ -1,9 +1,10 @@
-package controller;
+package booking.controller;
 
 import models.Booking;
 import models.Human;
 import service.BookingService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingController {
