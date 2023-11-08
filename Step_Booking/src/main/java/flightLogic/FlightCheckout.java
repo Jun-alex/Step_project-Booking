@@ -1,13 +1,10 @@
-package org.example;
+package flightLogic;
 
-import org.example.flightDao.CollectionFlightDao;
-import org.example.flightDao.FlightController;
-import org.example.flightDao.FlightService;
-import org.example.model.Flight;
+import flightLogic.flightDao.CollectionFlightDao;
+import flightLogic.flightDao.FlightController;
+import flightLogic.flightDao.FlightService;
 
-import java.util.List;
-
-public class Main {
+public class FlightCheckout {
     public static void main(String[] args) {
 //        При створенні конструктора collectionFlightDao ми генеруємо 501 рейс
 //        (з айді від 0 до 500 включно), завантажуємо їх у файл flights.json

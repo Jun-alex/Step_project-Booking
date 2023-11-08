@@ -1,4 +1,4 @@
-package org.example.model;
+package flightLogic.model;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class Flight {
     String destination;
     int availableSeatsQuantity;
     //    Пустий конструктор необхідний для того, щоб Jackson зміг десеріалізувати json файл, інакше виникне помилка
-//    Cannot construct instance of `org.example.model.Flight`
+//    Cannot construct instance of `flightLogic.model.Flight`
     public Flight() {
 
     }

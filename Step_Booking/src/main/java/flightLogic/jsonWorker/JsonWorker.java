@@ -1,4 +1,4 @@
-package org.example.jsonWorker;
+package flightLogic.jsonWorker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

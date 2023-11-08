@@ -1,7 +1,7 @@
-package org.example.flightDao;
+package flightLogic.flightDao;
 
-import org.example.jsonWorker.JsonWorker;
-import org.example.model.Flight;
+import flightLogic.jsonWorker.JsonWorker;
+import flightLogic.model.Flight;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class CollectionFlightDao implements FlightDao {
-    private final String filePath = "Step_Booking/src/main/java/org/example/flightsDatabase/flights.json";
+    private final String filePath = "Step_Booking/src/main/java/flightLogic/flightsDatabase/flights.json";
     private final List<Flight> flightsDatabase = new ArrayList<>();
     private final List<Flight> generatedFlights = new ArrayList<>();
     private static final Set<String> destinations= new HashSet<>();
