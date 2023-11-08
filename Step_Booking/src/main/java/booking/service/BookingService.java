@@ -1,9 +1,9 @@
 package booking.service;
 
-import DAO.BookingDAO;
-import jsonWorker.JsonWorker;
-import models.Booking;
-import models.Human;
+import booking.DAO.BookingDAO;
+import booking.jsonWorker.JsonWorker;
+import booking.models.Booking;
+import booking.models.Human;
 
 import java.io.File;
 import java.io.FileInputStream;

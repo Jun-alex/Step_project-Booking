@@ -1,8 +1,8 @@
 package booking.controller;
 
-import models.Booking;
-import models.Human;
-import service.BookingService;
+import booking.models.Booking;
+import booking.models.Human;
+import booking.service.BookingService;
 
 import java.util.ArrayList;
 import java.util.List;

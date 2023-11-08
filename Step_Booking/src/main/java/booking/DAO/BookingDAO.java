@@ -1,6 +1,6 @@
 package booking.DAO;
 
-import models.Booking;
+import booking.models.Booking;
 
 import java.util.List;
 
