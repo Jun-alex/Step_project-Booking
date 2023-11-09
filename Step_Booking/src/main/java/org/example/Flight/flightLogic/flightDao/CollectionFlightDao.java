@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class CollectionFlightDao implements FlightDao {
     private static final Set<String> destinations = new HashSet<>();
-    private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/Flight/flightLogic/flightDatabase/flights.json";
+    private final String filePath = "Step_Booking/src/main/java/org/example/Flight/flightLogic/flightDatabase/flights.json";
 
     private final List<Flight> flightsDatabase = new ArrayList<>();
     private final List<Flight> generatedFlights = new ArrayList<>();

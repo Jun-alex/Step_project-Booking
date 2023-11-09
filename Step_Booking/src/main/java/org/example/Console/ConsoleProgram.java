@@ -127,6 +127,7 @@ public class ConsoleProgram {
 
                                 if (isBookingSuccessful == 0) {
                                     System.out.println("Бронювання успішно завершено.");
+                                    bookingController.loadDataBooking();
                                 } else if (isBookingSuccessful == -1) {
                                     System.out.println("Помилка бронювання рейса.");
                                 }
