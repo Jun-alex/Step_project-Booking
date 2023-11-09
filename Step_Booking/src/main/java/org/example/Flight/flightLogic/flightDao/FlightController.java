@@ -5,6 +5,7 @@ import org.example.Flight.flightLogic.model.Flight;
 
 import java.util.List;
 
+
 public class FlightController {
     private FlightService flightService;
 

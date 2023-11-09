@@ -115,10 +115,6 @@ public class CollectionFlightDao implements FlightDao {
             }
         }
         return flightById;
-//        Optional<Flight> flight = generatedFlights.stream()
-//                .filter(f -> f.getId() == id - 1)
-//                .findFirst();
-//        return flight.orElse(null);
     }
 
     @Override

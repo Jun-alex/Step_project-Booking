@@ -13,3 +13,4 @@ public interface BookingDAO {
     public List<Booking> getAllBookings();
     public Booking findByIdBooking(int bookingId);
 }
+

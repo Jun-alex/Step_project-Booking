@@ -6,7 +6,6 @@ import org.example.Flight.flightLogic.flightDao.FlightService;
 import org.example.Flight.flightLogic.model.Flight;
 
 
-import org.example.booking.DAO.CollectionBooking;
 import org.example.booking.controller.BookingController;
 import org.example.booking.models.Booking;
 import org.example.booking.models.Human;
@@ -15,7 +14,6 @@ import org.example.booking.service.BookingService;
 import java.util.*;
 
 public class ConsoleProgram {
-
     private FlightController flightController;
     private BookingController bookingController;
 

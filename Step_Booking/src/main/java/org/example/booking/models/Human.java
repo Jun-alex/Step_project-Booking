@@ -2,6 +2,7 @@ package org.example.booking.models;
 
 import java.util.Objects;
 
+
 public class Human {
     private String name;
     private String surname;

@@ -2,6 +2,7 @@ package org.example.Flight.flightLogic.model;
 
 import java.util.Objects;
 
+
 public class Flight {
     private int id;
     String date;

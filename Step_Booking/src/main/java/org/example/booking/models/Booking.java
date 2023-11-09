@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Booking {
     private List<Human> humans;
     private String destination;
