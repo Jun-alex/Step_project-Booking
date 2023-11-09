@@ -1,21 +1,18 @@
-package booking.service;
+package org.example.booking.service;
 
-import booking.DAO.BookingDAO;
-import booking.DAO.CollectionBooking;
-import booking.jsonWorker.JsonWorker;
-import booking.models.Booking;
-import booking.models.Human;
+import org.example.booking.DAO.BookingDAO;
+import org.example.booking.DAO.CollectionBooking;
+import org.example.booking.jsonWorker.JsonWorker;
+import org.example.booking.models.Booking;
+import org.example.booking.models.Human;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookingService {
-    private final String filePath = "Step_Booking/src/main/java/booking/dataBookings/data.json";
+    private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/booking/dataBookings/data.json";
     private final BookingDAO bookingDAO = new CollectionBooking();
 
     public List<Booking> getAllBookings() {

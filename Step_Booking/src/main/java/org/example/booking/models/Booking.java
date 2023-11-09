@@ -1,4 +1,4 @@
-package booking.models;
+package org.example.booking.models;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

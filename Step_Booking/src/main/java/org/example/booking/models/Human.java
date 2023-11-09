@@ -1,4 +1,4 @@
-package models;
+package org.example.booking.models;
 
 import java.util.Objects;
 

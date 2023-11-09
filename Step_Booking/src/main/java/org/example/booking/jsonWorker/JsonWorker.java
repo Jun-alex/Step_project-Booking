@@ -1,4 +1,4 @@
-package org.example.jsonWorker;
+package org.example.booking.jsonWorker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

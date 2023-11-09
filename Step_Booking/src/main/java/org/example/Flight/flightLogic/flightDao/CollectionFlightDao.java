@@ -1,7 +1,7 @@
-package org.example.flightDao;
+package org.example.Flight.flightLogic.flightDao;
 
-import org.example.jsonWorker.JsonWorker;
-import org.example.model.Flight;
+import org.example.Flight.flightLogic.jsonWorker.JsonWorker;
+import org.example.Flight.flightLogic.model.Flight;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -12,22 +12,17 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class CollectionFlightDao implements FlightDao {
-    private final String filePath = "Step_Booking/src/main/java/org/example/flightsDatabase/flights.json";
+    private static final Set<String> destinations = new HashSet<>();
+    private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/Flight/flightLogic/flightDatabase/flights.json";
+
     private final List<Flight> flightsDatabase = new ArrayList<>();
     private final List<Flight> generatedFlights = new ArrayList<>();
-    private static final Set<String> destinations= new HashSet<>();
+
     public CollectionFlightDao() {
         initializeDestinationsMap();
         generateFlights();
         loadFlightsToFile();
         saveFlights();
-    }
-
-    private void generateFlights() {
-        for(int i = 0; i <= 500; i++) {
-            Flight flight = new Flight(i, generateRandomDate(), generateRandomTime(), generateRandomDestination(), generateRandomAvailableSeatsQuantity());
-            generatedFlights.add(flight);
-        }
     }
 
     private static void initializeDestinationsMap() {
@@ -52,6 +47,45 @@ public class CollectionFlightDao implements FlightDao {
         destinations.add("Washington");
         destinations.add("Madrid");
         destinations.add("Seoul");
+    }
+
+    private static String generateRandomDate() {
+//        Генеруємо випадкову дату в діапазоні від "08.11.2023" до "18.11.2023"
+        LocalDate startDate = LocalDate.of(2023, 11, 8); // Початкова дата
+        LocalDate endDate = LocalDate.of(2023, 11, 18); // Кінцева дата
+
+        long startEpochDay = startDate.toEpochDay() * 86_400_000;
+        long endEpochDay = endDate.toEpochDay() * 86_400_000;
+//        Генеруємо випадкове число epoch в діапазоні від startEpochDay (початкова дата) до endEpochDay (кінцева дата)
+        long randomEpochDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
+
+//        Форматуємо випадкову дату в рядок за допомогою SimpleDateFormat
+        return new SimpleDateFormat("dd.MM.yyyy").format(new Date(randomEpochDay));
+    }
+
+    private static String generateRandomTime() {
+//        Генеруємо випадковий час рейсу
+        Random random = new Random();
+//        Generate random integers in range 0 to 1439
+        int minutesAfterMidnight = random.nextInt(1440);
+        LocalTime time = LocalTime.of(minutesAfterMidnight / 60, minutesAfterMidnight % 60);
+        return time.toString();
+    }
+
+    private static String generateRandomDestination() {
+//        Генеруємо випадкову точку прибуття
+        Random random = new Random();
+        int destinationIndex = random.nextInt(destinations.size());
+//        Перетворення HashSet в ArrayList
+        List<String> destinationsList = new ArrayList<>(destinations);
+        return destinationsList.get(destinationIndex);
+    }
+
+    private void generateFlights() {
+        for (int i = 0; i <= 500; i++) {
+            Flight flight = new Flight(i, generateRandomDate(), generateRandomTime(), generateRandomDestination(), generateRandomAvailableSeatsQuantity());
+            generatedFlights.add(flight);
+        }
     }
 
     @Override
@@ -95,35 +129,7 @@ public class CollectionFlightDao implements FlightDao {
                         f.getAvailableSeatsQuantity() >= ticketsQuantity)
                 .collect(Collectors.toList());
     }
-    private static String generateRandomDate() {
-//        Генеруємо випадкову дату в діапазоні від "08.11.2023" до "18.11.2023"
-        LocalDate startDate = LocalDate.of(2023, 11, 8); // Початкова дата
-        LocalDate endDate = LocalDate.of(2023, 11, 18); // Кінцева дата
 
-        long startEpochDay = startDate.toEpochDay() * 86_400_000;
-        long endEpochDay = endDate.toEpochDay() * 86_400_000;
-//        Генеруємо випадкове число epoch в діапазоні від startEpochDay (початкова дата) до endEpochDay (кінцева дата)
-        long randomEpochDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
-
-//        Форматуємо випадкову дату в рядок за допомогою SimpleDateFormat
-        return new SimpleDateFormat("dd.MM.yyyy").format(new Date(randomEpochDay));
-    }
-    private static String generateRandomTime() {
-//        Генеруємо випадковий час рейсу
-        Random random = new Random();
-//        Generate random integers in range 0 to 1439
-        int minutesAfterMidnight = random.nextInt(1440);
-        LocalTime time = LocalTime.of(minutesAfterMidnight / 60, minutesAfterMidnight % 60);
-        return time.toString();
-    }
-    private static String generateRandomDestination() {
-//        Генеруємо випадкову точку прибуття
-        Random random = new Random();
-        int destinationIndex = random.nextInt(destinations.size());
-//        Перетворення HashSet в ArrayList
-        List<String> destinationsList = new ArrayList<>(destinations);
-        return destinationsList.get(destinationIndex);
-    }
     private int generateRandomAvailableSeatsQuantity() {
 //        Генеруємо кількість вільних місць (від 0 до 188)
         Random random = new Random();
