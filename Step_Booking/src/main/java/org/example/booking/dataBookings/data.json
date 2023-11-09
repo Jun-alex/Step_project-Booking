@@ -1,15 +1,11 @@
 [ {
   "humans" : [ {
-    "name" : "Kris",
-    "surname" : "Soul"
-  }, {
-    "name" : "Kris",
-    "surname" : "Soul"
+    "name" : "Илья",
+    "surname" : "Комаров"
   } ],
-  "destination" : "Пункт Призначення",
-  "dateCreate" : "08.11.2023",
-  "dateUpdate" : "08.11.2023",
-  "id" : 1,
-  "idFlight" : 13
+  "destination" : "London",
+  "dateCreate" : "09.11.2023",
+  "dateUpdate" : "09.11.2023",
+  "id" : 0,
+  "idFlight" : 55
 } ]
-
