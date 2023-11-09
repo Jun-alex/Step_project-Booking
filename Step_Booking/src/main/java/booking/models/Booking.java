@@ -1,29 +1,32 @@
 package booking.models;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Booking {
     private List<Human> humans;
     private String destination;
-    private LocalDate dateCreate;
-    private LocalDate dateUpdate;
+    private String dateCreate;
+    private String dateUpdate;
     private int id;
     private int idFlight;
     public Booking(List<Human> humans, int id, String destination, int idFlight ) {
         this.humans = humans;
         this.destination = destination;
-        this.dateCreate = LocalDate.now();
-        this.dateUpdate = LocalDate.now();
+        long today = LocalDate.now().toEpochDay() * 86_400_000;
+        this.dateCreate = new SimpleDateFormat("dd.MM.yyyy").format(new Date(today));
+        this.dateUpdate = new SimpleDateFormat("dd.MM.yyyy").format(new Date(today));
         this.id = id;
         this.idFlight = idFlight;
     }
     public List<Human> getHumans() {return humans;}
     public void setHumans(List<Human> humans) {this.humans = humans;}
-    public LocalDate getDateCreate() {return dateCreate;}
-    public LocalDate getDateUpdate() {return dateUpdate;}
-    public void setDateUpdate(LocalDate dateUpdate) {this.dateUpdate = dateUpdate;}
+    public String getDateCreate() {return dateCreate;}
+    public String getDateUpdate() {return dateUpdate;}
+    public void setDateUpdate(String dateUpdate) {this.dateUpdate = dateUpdate;}
     public int getId() {return id;}
     public String getDestination() {return destination;}
     public void setDestination(String destination) {this.destination = destination;}
@@ -36,9 +39,9 @@ public class Booking {
         }
         final StringBuilder sb = new StringBuilder()
                 .append("Booking= {")
-                .append("humans count=").append(humans.size())
-                .append("humans =").append(humansList)
-                .append("destination =").append(destination)
+                .append("humans count=").append(humans.size()).append('\'')
+                .append(", humans =").append(humansList).append('\'')
+                .append(", destination =").append(destination).append('\'')
                 .append(", dateCreate='").append(dateCreate).append('\'')
                 .append(", dateUpdate='").append(dateUpdate).append('\'')
                 .append(", id='").append(id).append('\'')

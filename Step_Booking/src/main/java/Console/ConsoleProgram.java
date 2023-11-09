@@ -67,13 +67,13 @@ public class ConsoleProgram {
                             continue;
                         }
 
-                        List<Flight> foundFlights = flightController.
-                                getFlightByUserInfo(destination, date, passengerCount);
+                        List<Flight> foundFlights = flightController.getFlightByUserInfo(destination, date,
+                                passengerCount);
 
                         if (foundFlights.isEmpty()) {
                             System.out.println("Рейси не знайдені.");
                         } else {
-                            //рейсы с порядковым номерoм
+                            // рейсы с порядковым номерoм
                             for (int i = 0; i < foundFlights.size(); i++) {
                                 System.out.println(i + 1 + ". " + foundFlights.get(i).toString());
                             }
@@ -82,19 +82,19 @@ public class ConsoleProgram {
                             int selectedFlightNumber = scanner.nextInt();
 
                             if (selectedFlightNumber == 0) {
-                                //вернутся в меню
+                                // вернутся в меню
                                 break;
                             } else if (selectedFlightNumber > 0 && selectedFlightNumber <= foundFlights.size()) {
-                                //данные для бронированич
+                                // данные для бронированич
                                 System.out.println("Введіть ім'я пасажира: ");
                                 String passengerName = scanner.next();
                                 System.out.println("Введіть прізвище пасажира: ");
                                 String passengerLastName = scanner.next();
 
-                                //бронирование рейсв
+                                // бронирование рейсв
                                 boolean isBookingSuccessful = bookingController.bookFlight(
                                         foundFlights.get(selectedFlightNumber - 1),
-                                        //passengerCount нужно использовать в bookFlight
+                                        // passengerCount нужно использовать в bookFlight
                                         passengerName, passengerLastName, passengerCount);
 
                                 if (isBookingSuccessful) {
