@@ -1,8 +1,18 @@
-package Console;
+package org.example.Console;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import org.example.Flight.flightLogic.flightDao.CollectionFlightDao;
+import org.example.Flight.flightLogic.flightDao.FlightController;
+import org.example.Flight.flightLogic.flightDao.FlightService;
+import org.example.Flight.flightLogic.model.Flight;
+
+
+import org.example.booking.DAO.CollectionBooking;
+import org.example.booking.controller.BookingController;
+import org.example.booking.models.Booking;
+import org.example.booking.models.Human;
+import org.example.booking.service.BookingService;
+
+import java.util.*;
 
 public class ConsoleProgram {
 
@@ -10,8 +20,11 @@ public class ConsoleProgram {
     private BookingController bookingController;
 
     public ConsoleProgram() {
-        flightController = new FlightController();
-        bookingController = new BookingController();
+        FlightService flightService = new FlightService(new CollectionFlightDao());
+        BookingService bookingService = new BookingService();
+
+        flightController = new FlightController(flightService);
+        bookingController = new BookingController(bookingService);
     }
 
     public static void main(String[] args) {
@@ -22,6 +35,10 @@ public class ConsoleProgram {
     public void start() {
         boolean isRunning = true;
         Scanner scanner = new Scanner(System.in);
+
+        List<Human> humans = new ArrayList<>();
+        String destination = "";
+        int idFlight = 0;
 
         while (isRunning) {
             try {
@@ -45,7 +62,9 @@ public class ConsoleProgram {
                         int flightId;
                         try {
                             flightId = scanner.nextInt();
-                            flightController.getFlightById(flightId);
+                            Flight flightById = flightController.getFlightById(flightId);
+                            System.out.printf("Рейс з айді %s: %s", flightId, flightById);
+                            System.out.println();
                         } catch (InputMismatchException e) {
                             System.out.println("Помилка введення айді рейсу. Будь ласка, введіть число.");
                             scanner.next();
@@ -53,7 +72,7 @@ public class ConsoleProgram {
                         break;
                     case 3:
                         System.out.println("Місце призначення: ");
-                        String destination = scanner.next();
+                        destination = scanner.next();
                         System.out.println("Дата: ");
                         String date = scanner.next();
                         System.out.println("Кількість осіб: ");
@@ -66,6 +85,8 @@ public class ConsoleProgram {
                             scanner.next();
                             continue;
                         }
+
+                        List<Human> passengers = new ArrayList<>();
 
                         List<Flight> foundFlights = flightController.
                                 getFlightByUserInfo(destination, date, passengerCount);
@@ -86,20 +107,27 @@ public class ConsoleProgram {
                                 break;
                             } else if (selectedFlightNumber > 0 && selectedFlightNumber <= foundFlights.size()) {
                                 //данные для бронированич
-                                System.out.println("Введіть ім'я пасажира: ");
-                                String passengerName = scanner.next();
-                                System.out.println("Введіть прізвище пасажира: ");
-                                String passengerLastName = scanner.next();
+                                humans.clear();
+                                int selectedFlightIndex = selectedFlightNumber - 1;
+
+                                //id рейса
+                                idFlight = foundFlights.get(selectedFlightIndex).getId();
+
+                                for (int passengerIndex = 1; passengerIndex <= passengerCount; passengerIndex++) {
+                                    System.out.println("Введіть ім'я пасажира " + passengerIndex + ": ");
+                                    String passengerName = scanner.next();
+                                    System.out.println("Введіть прізвище пасажира " + passengerIndex + ": ");
+                                    String passengerLastName = scanner.next();
+                                    humans.add(new Human(passengerName, passengerLastName));
+                                }
 
                                 //бронирование рейсв
-                                boolean isBookingSuccessful = bookingController.bookFlight(
-                                        foundFlights.get(selectedFlightNumber - 1),
-                                        //passengerCount нужно использовать в bookFlight
-                                        passengerName, passengerLastName, passengerCount);
+                                int isBookingSuccessful;
+                                isBookingSuccessful = bookingController.saveBooking(humans, destination, idFlight);
 
-                                if (isBookingSuccessful) {
+                                if (isBookingSuccessful == 0) {
                                     System.out.println("Бронювання успішно завершено.");
-                                } else {
+                                } else if (isBookingSuccessful == -1) {
                                     System.out.println("Помилка бронювання рейса.");
                                 }
                             } else {
@@ -130,10 +158,12 @@ public class ConsoleProgram {
                         if (firstName.isEmpty() || lastName.isEmpty()) {
                             System.out.println("Ім'я та прізвище пасажира повинні бути заповнені.");
                         } else {
-                            bookingController.displayMyBookings(firstName, lastName);
+                            List<Booking> allUserBookings = bookingController.getAllUserBookings(firstName, lastName);
+                            System.out.println(Collections.<Booking>unmodifiableList(allUserBookings));
                         }
                         break;
                     case 6:
+
                         isRunning = false;
                         break;
                     default:
