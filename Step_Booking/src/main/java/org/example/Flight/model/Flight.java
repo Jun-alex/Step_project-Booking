@@ -1,6 +1,7 @@
-package org.example.Flight.flightLogic.model;
+package org.example.Flight.model;
 
 import java.util.Objects;
+
 
 public class Flight {
     private int id;

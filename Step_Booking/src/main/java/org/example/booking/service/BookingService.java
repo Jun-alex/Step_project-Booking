@@ -7,9 +7,8 @@ import org.example.booking.models.Booking;
 import org.example.booking.models.Human;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class BookingService {
     private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/booking/dataBookings/data.json";

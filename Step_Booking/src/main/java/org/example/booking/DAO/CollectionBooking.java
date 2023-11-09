@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class CollectionBooking implements BookingDAO {
     private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/booking/dataBookings/data.json";
     private List<Booking> bookings = new ArrayList<>();

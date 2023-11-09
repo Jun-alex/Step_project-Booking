@@ -1,4 +1,4 @@
-package org.example.Flight.flightLogic.jsonWorker;
+package org.example.Flight.jsonWorker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class JsonWorker {
     public static <E> void loadDataToFile(List<E> data, String filePath) {

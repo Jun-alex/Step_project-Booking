@@ -1,9 +1,10 @@
-package org.example.Flight.flightLogic.flightDao;
+package org.example.Flight.flightDao;
 
 
-import org.example.Flight.flightLogic.model.Flight;
+import org.example.Flight.model.Flight;
 
 import java.util.List;
+
 
 public class FlightController {
     private FlightService flightService;
