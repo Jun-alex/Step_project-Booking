@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class JsonWorker {
     public static <E> void loadDataToFile(List<E> data, String filePath) {
         ObjectMapper objectMapper = new ObjectMapper();

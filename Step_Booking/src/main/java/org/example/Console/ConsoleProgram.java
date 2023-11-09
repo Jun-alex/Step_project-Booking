@@ -1,9 +1,9 @@
 package org.example.Console;
 
-import org.example.Flight.flightLogic.flightDao.CollectionFlightDao;
-import org.example.Flight.flightLogic.flightDao.FlightController;
-import org.example.Flight.flightLogic.flightDao.FlightService;
-import org.example.Flight.flightLogic.model.Flight;
+import org.example.Flight.flightDao.CollectionFlightDao;
+import org.example.Flight.flightDao.FlightController;
+import org.example.Flight.flightDao.FlightService;
+import org.example.Flight.model.Flight;
 
 
 import org.example.booking.controller.BookingController;
@@ -63,6 +63,7 @@ public class ConsoleProgram {
                             Flight flightById = flightController.getFlightById(flightId);
                             System.out.printf("Рейс з айді %s: %s", flightId, flightById);
                             System.out.println();
+                            flightController.getFlightById(flightId);
                         } catch (InputMismatchException e) {
                             System.out.println("Помилка введення айді рейсу. Будь ласка, введіть число.");
                             scanner.next();
@@ -175,3 +176,4 @@ public class ConsoleProgram {
         scanner.close();
     }
 }
+
