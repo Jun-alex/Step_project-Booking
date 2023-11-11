@@ -1,9 +1,9 @@
-package org.example.Console;
+package org.example.console;
 
-import org.example.Flight.flightDao.CollectionFlightDao;
-import org.example.Flight.flightDao.FlightController;
-import org.example.Flight.flightDao.FlightService;
-import org.example.Flight.model.Flight;
+import org.example.flight.flightDao.CollectionFlightDao;
+import org.example.flight.flightDao.FlightController;
+import org.example.flight.flightDao.FlightService;
+import org.example.flight.model.Flight;
 
 
 import org.example.booking.controller.BookingController;
@@ -14,8 +14,8 @@ import org.example.booking.service.BookingService;
 import java.util.*;
 
 public class ConsoleProgram {
-    private FlightController flightController;
-    private BookingController bookingController;
+    private final FlightController flightController;
+    private final BookingController bookingController;
 
     public ConsoleProgram() {
         FlightService flightService = new FlightService(new CollectionFlightDao());
@@ -35,7 +35,7 @@ public class ConsoleProgram {
         Scanner scanner = new Scanner(System.in);
 
         List<Human> humans = new ArrayList<>();
-        String destination = "";
+        String destination;
         int idFlight = 0;
 
         while (isRunning) {
@@ -52,10 +52,8 @@ public class ConsoleProgram {
                 int choice = scanner.nextInt();
 
                 switch (choice) {
-                    case 1:
-                        flightController.displayFlightsWithin24Hours();
-                        break;
-                    case 2:
+                    case 1 -> flightController.displayFlightsWithin24Hours();
+                    case 2 -> {
                         System.out.println("Введіть айді рейсу: ");
                         int flightId;
                         try {
@@ -68,15 +66,16 @@ public class ConsoleProgram {
                             System.out.println("Помилка введення айді рейсу. Будь ласка, введіть число.");
                             scanner.next();
                         }
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
+                        scanner.nextLine();
                         System.out.println("Місце призначення: ");
-                        destination = scanner.next();
-                        System.out.println("Дата: ");
-                        String date = scanner.next();
+                        destination = scanner.nextLine();
+                        scanner.nextLine();
+                        System.out.println("Введіть дату (у форматі dd.MM.yyyy): ");
+                        String date = scanner.nextLine();
                         System.out.println("Кількість осіб: ");
                         int passengerCount;
-
                         try {
                             passengerCount = scanner.nextInt();
                         } catch (InputMismatchException e) {
@@ -84,12 +83,9 @@ public class ConsoleProgram {
                             scanner.next();
                             continue;
                         }
-
                         List<Human> passengers = new ArrayList<>();
-
                         List<Flight> foundFlights = flightController.
                                 getFlightByUserInfo(destination, date, passengerCount);
-
                         if (foundFlights.isEmpty()) {
                             System.out.println("Рейси не знайдені.");
                         } else {
@@ -103,9 +99,8 @@ public class ConsoleProgram {
 
                             if (selectedFlightNumber == 0) {
                                 //вернутся в меню
-                                break;
                             } else if (selectedFlightNumber > 0 && selectedFlightNumber <= foundFlights.size()) {
-                                //данные для бронированич
+                                //данные для бронирования
                                 humans.clear();
                                 int selectedFlightIndex = selectedFlightNumber - 1;
 
@@ -120,7 +115,7 @@ public class ConsoleProgram {
                                     humans.add(new Human(passengerName, passengerLastName));
                                 }
 
-                                //бронирование рейсв
+                                //бронирование рейса
                                 int isBookingSuccessful;
                                 isBookingSuccessful = bookingController.saveBooking(humans, destination, idFlight);
 
@@ -134,11 +129,10 @@ public class ConsoleProgram {
                                 System.out.println("Неправильний вибір рейсу.");
                             }
                         }
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         System.out.println("Введіть айді бронювання: ");
                         int bookingId;
-
                         try {
                             bookingId = scanner.nextInt();
                         } catch (InputMismatchException e) {
@@ -146,28 +140,22 @@ public class ConsoleProgram {
                             scanner.next();
                             continue;
                         }
-
                         bookingController.cancelBooking(bookingId);
-                        break;
-                    case 5:
+                    }
+                    case 5 -> {
                         System.out.println("Ім'я: ");
                         String firstName = scanner.next();
                         System.out.println("Прізвище: ");
                         String lastName = scanner.next();
-
                         if (firstName.isEmpty() || lastName.isEmpty()) {
                             System.out.println("Ім'я та прізвище пасажира повинні бути заповнені.");
                         } else {
                             List<Booking> allUserBookings = bookingController.getAllUserBookings(firstName, lastName);
                             System.out.println(Collections.<Booking>unmodifiableList(allUserBookings));
                         }
-                        break;
-                    case 6:
-
-                        isRunning = false;
-                        break;
-                    default:
-                        System.out.println("Невірний вибір. Будь ласка, виберіть інший пункт меню.");
+                    }
+                    case 6 -> isRunning = false;
+                    default -> System.out.println("Невірний вибір. Будь ласка, виберіть інший пункт меню.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Помилка вводу. Введені дані не відповідають очікуваному формату.");
@@ -177,4 +165,3 @@ public class ConsoleProgram {
         scanner.close();
     }
 }
-

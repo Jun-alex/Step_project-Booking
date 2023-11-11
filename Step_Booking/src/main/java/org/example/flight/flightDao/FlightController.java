@@ -1,7 +1,7 @@
-package org.example.Flight.flightDao;
+package org.example.flight.flightDao;
 
 
-import org.example.Flight.model.Flight;
+import org.example.flight.model.Flight;
 
 import java.util.List;
 

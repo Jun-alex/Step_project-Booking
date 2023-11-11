@@ -1,4 +1,4 @@
-package org.example.Flight.model;
+package org.example.flight.model;
 
 import java.util.Objects;
 
