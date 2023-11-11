@@ -1,7 +1,7 @@
-package org.example.Flight.flightLogic.flightDao;
+package org.example.Flight.flightDao;
 
-import org.example.Flight.flightLogic.jsonWorker.JsonWorker;
-import org.example.Flight.flightLogic.model.Flight;
+import org.example.Flight.jsonWorker.JsonWorker;
+import org.example.Flight.model.Flight;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class CollectionFlightDao implements FlightDao {
     private static final Set<String> destinations = new HashSet<>();
-    private final String filePath = "Step_Booking/src/main/java/org/example/Flight/flightLogic/flightDatabase/flights.json";
+    private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/Flight/flightDatabase/flights.json";
 
     private final List<Flight> flightsDatabase = new ArrayList<>();
     private final List<Flight> generatedFlights = new ArrayList<>();
@@ -115,10 +115,6 @@ public class CollectionFlightDao implements FlightDao {
             }
         }
         return flightById;
-//        Optional<Flight> flight = generatedFlights.stream()
-//                .filter(f -> f.getId() == id - 1)
-//                .findFirst();
-//        return flight.orElse(null);
     }
 
     @Override
