@@ -1,4 +1,4 @@
-package homework.home5.Flight.model;
+package org.example.Flight.model;
 
 import java.util.Objects;
 

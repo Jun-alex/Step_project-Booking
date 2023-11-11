@@ -21,6 +21,16 @@ public class CollectionBooking implements BookingDAO {
         }
         if (!file.exists()){
             bookings = new ArrayList<>();
+
+        }
+    }
+    public CollectionBooking(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            bookings = JsonWorker.getDataFromFile(Booking.class, filePath);
+        }
+        if (!file.exists()){
+            bookings = new ArrayList<>();
         }
     }
 

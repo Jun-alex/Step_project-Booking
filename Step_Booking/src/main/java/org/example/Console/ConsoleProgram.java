@@ -5,7 +5,6 @@ import org.example.Flight.flightDao.FlightController;
 import org.example.Flight.flightDao.FlightService;
 import org.example.Flight.model.Flight;
 
-
 import org.example.booking.controller.BookingController;
 import org.example.booking.models.Booking;
 import org.example.booking.models.Human;
