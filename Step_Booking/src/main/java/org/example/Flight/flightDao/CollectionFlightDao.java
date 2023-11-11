@@ -1,4 +1,4 @@
-package org.example.Flight.flightDao;
+package homework.home5.Flight.flightDao;
 
 import org.example.Flight.jsonWorker.JsonWorker;
 import org.example.Flight.model.Flight;
