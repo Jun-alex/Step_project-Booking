@@ -1,7 +1,7 @@
-package org.example.Flight.flightDao;
+package org.example.flight.flightDao;
 
-import org.example.Flight.jsonWorker.JsonWorker;
-import org.example.Flight.model.Flight;
+import org.example.flight.jsonWorker.JsonWorker;
+import org.example.flight.model.Flight;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -24,6 +24,14 @@ public class CollectionFlightDao implements FlightDao {
         loadFlightsToFile();
         saveFlights();
     }
+
+    public CollectionFlightDao(String fp) {
+        initializeDestinationsMap();
+        generateFlights();
+        loadFlightsToFile(fp);
+        saveFlights(fp);
+    }
+
 
     private static void initializeDestinationsMap() {
         destinations.add("Warsaw");
@@ -98,10 +106,25 @@ public class CollectionFlightDao implements FlightDao {
         }
     }
 
+    public void loadFlightsToFile(String fp) {
+//        "База даних" програми має бути скопійована у текстовий файл
+//        Завантажуємо рейси у файл один раз, а не при кожному запуску програми
+        File file = new File(fp);
+        if (!file.exists()) {
+            JsonWorker.loadDataToFile(generatedFlights, fp);
+        }
+    }
+
     @Override
     public void saveFlights() {
 //        "База даних" має зчитуватись додатком при запуску
         List<Flight> dataFromFile = JsonWorker.getDataFromFile(Flight.class, filePath);
+        flightsDatabase.addAll(dataFromFile);
+    }
+
+    public void saveFlights(String fp) {
+//        "База даних" має зчитуватись додатком при запуску
+        List<Flight> dataFromFile = JsonWorker.getDataFromFile(Flight.class, fp);
         flightsDatabase.addAll(dataFromFile);
     }
 
@@ -129,8 +152,7 @@ public class CollectionFlightDao implements FlightDao {
     private int generateRandomAvailableSeatsQuantity() {
 //        Генеруємо кількість вільних місць (від 0 до 188)
         Random random = new Random();
-        int availableSeatsQuantity = random.nextInt(189);
-        return availableSeatsQuantity;
+        return random.nextInt(189);
     }
 
     public List<Flight> getFlightsDatabase() {
