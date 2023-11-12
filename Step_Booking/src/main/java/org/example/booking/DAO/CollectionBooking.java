@@ -11,17 +11,26 @@ import java.util.stream.Collectors;
 
 
 public class CollectionBooking implements BookingDAO {
-    private final String filePath = "Step_project-Booking/Step_Booking/src/main/java/org/example/booking/dataBookings/data.json";
-    private List<Booking> bookings = new ArrayList<>();
+    private final String filePath = "Step_Booking/src/main/java/org/example/booking/dataBookings/data.json";
+    private List<Booking> bookings;
 
     public CollectionBooking() {
         File file = new File(filePath);
         if (file.exists()) {
-            System.out.println("Dats");
-            bookings = new ArrayList<>();
-        } else {
-            System.out.println("Data");
             bookings = JsonWorker.getDataFromFile(Booking.class, filePath);
+        }
+        if (!file.exists()){
+            bookings = new ArrayList<>();
+
+        }
+    }
+    public CollectionBooking(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            bookings = JsonWorker.getDataFromFile(Booking.class, filePath);
+        }
+        if (!file.exists()){
+            bookings = new ArrayList<>();
         }
     }
 
@@ -53,9 +62,23 @@ public class CollectionBooking implements BookingDAO {
     @Override
     public List<Booking> getAllUserBookings(String name, String surname) {
         return getAllBookings().stream()
-                .filter(booking -> booking.getHumans().stream().anyMatch(human -> human.getName().equals(name)
-                        && human.getSurname().equals(surname)))
+                .filter(booking -> booking.getHumans().stream()
+                        .anyMatch(human ->
+                                human.getName().equals(name) && human.getSurname().equals(surname)
+                        ))
                 .collect(Collectors.toList());
+//        List<Booking> allBookings = getAllBookings();
+//        List<Booking> userBookings = new ArrayList<>();
+//
+//        for (Booking booking : allBookings) {
+//            for (Human user : booking.getHumans()){
+//                // Перевірка, чи ім'я та прізвище користувача відповідають поточному бронюванню
+//                if (user.getName().equals(name) && user.getSurname().equals(surname)) {
+//                    userBookings.add(booking);
+//                }
+//            }
+//        }
+//        return userBookings;
     }
 
     public List<Booking> getAllBookings() {

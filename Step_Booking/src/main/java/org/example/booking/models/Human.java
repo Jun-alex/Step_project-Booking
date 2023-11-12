@@ -5,15 +5,16 @@ import java.util.Objects;
 public class Human {
     private String name;
     private String surname;
+    public Human(){}
     public Human(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+        return "Passenger = {" +
+                "name = '" + name + '\'' +
+                ", surname = '" + surname + '\'' +
                 '}';
     }
     @Override

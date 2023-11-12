@@ -13,6 +13,7 @@ public class Booking {
     private String dateUpdate;
     private int id;
     private int idFlight;
+    public Booking(){}
     public Booking(List<Human> humans, int id, String destination, int idFlight ) {
         this.humans = humans;
         this.destination = destination;
@@ -38,14 +39,15 @@ public class Booking {
             humansList.append(human.toString()).append("\n");
         }
         final StringBuilder sb = new StringBuilder()
-                .append("Booking= {")
-                .append("humans count=").append(humans.size()).append('\'')
-                .append(", humans =").append(humansList).append('\'')
-                .append(", destination =").append(destination).append('\'')
-                .append(", dateCreate='").append(dateCreate).append('\'')
-                .append(", dateUpdate='").append(dateUpdate).append('\'')
-                .append(", id='").append(id).append('\'')
-                .append(", idFlight='").append(idFlight).append('\'')
+                .append("Booking = {").append('\n')
+                .append(" humans count = ").append(humans.size()).append('\n')
+                .append(", humans : ").append('\n')
+                .append(humansList).append('\n')
+                .append(", destination = ").append(destination).append('\n')
+                .append(", dateCreate = ").append(dateCreate).append('\n')
+                .append(", dateUpdate = ").append(dateUpdate).append('\n')
+                .append(", id = ").append(id).append('\n')
+                .append(", idFlight = '").append(idFlight).append('\'')
                 .append('}');
         return sb.toString();
     }
