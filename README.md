@@ -3,7 +3,6 @@
 _Done by:_
 1. __Alexander Lynnyk__
     - GitHub repository configuring
-    - ConsoleProgram
 1. __Vladyslav Soruk__
     - class Flight, dao and service layers for Flight, automatically generated database of flights
     - tests for classes related to flights logic
