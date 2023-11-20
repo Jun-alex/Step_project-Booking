@@ -58,9 +58,9 @@ public class CollectionFlightDao implements FlightDao {
     }
 
     private static String generateRandomDate() {
-//        Генеруємо випадкову дату в діапазоні від "08.11.2023" до "18.11.2023"
-        LocalDate startDate = LocalDate.of(2023, 11, 8); // Початкова дата
-        LocalDate endDate = LocalDate.of(2023, 11, 18); // Кінцева дата
+//        Генеруємо випадкову дату в діапазоні від "20.11.2023" до "30.11.2023"
+        LocalDate startDate = LocalDate.of(2023, 11, 20); // Початкова дата
+        LocalDate endDate = LocalDate.of(2023, 11, 30); // Кінцева дата
 
         long startEpochDay = startDate.toEpochDay() * 86_400_000;
         long endEpochDay = endDate.toEpochDay() * 86_400_000;
