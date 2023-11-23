@@ -67,7 +67,6 @@ public class ConsoleProgram {
                         }
                     }
                     case 3 -> {
-                        scanner.nextLine();
                         System.out.println("Місце призначення: ");
                         destination = scanner.nextLine();
                         scanner.nextLine();
