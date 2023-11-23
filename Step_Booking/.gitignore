@@ -1,4 +1,6 @@
-.idea
+Step_project-Booking\.idea
+Step_project-Booking\Step_Booking\.idea
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
